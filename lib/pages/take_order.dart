@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_promise/pages/take_details.dart';
+import 'package:project_promise/groups/customer.dart';
 
 class TakeOrderPage extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController numberController = TextEditingController();
 
- TakeOrderPage({Key? key}) : super(key: key);
+  TakeOrderPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +36,8 @@ class TakeOrderPage extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
                   labelText: 'Enter the name',
                 ),
               ),
@@ -47,12 +48,12 @@ class TakeOrderPage extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
                   labelText: 'Enter the address',
                 ),
               ),
-                const SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextField(
                 keyboardType: TextInputType.number,
                 controller: numberController,
@@ -60,23 +61,24 @@ class TakeOrderPage extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
                   labelText: 'Enter the Mobile Number',
                 ),
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
-                  final Map<String, String> customerInfo = {
-                    'name': nameController.text,
-                    'address': addressController.text,
-                    'phoneNumber': numberController.text,
-                  };
+                  Customer customer = Customer(
+                    name: nameController.text,
+                    mobileNumber: numberController.text,
+                    address: addressController.text,
+                  );
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => TakeDetailsPage(
-                        customerInfo:customerInfo,
+                        customerInfo: customer,
                       ),
                     ),
                   );

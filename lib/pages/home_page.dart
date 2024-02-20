@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_promise/pages/take_order.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +18,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  PageRouteBuilder(
-                    transitionDuration: const Duration(milliseconds: 300),
-                    pageBuilder: (context, animation, secondaryAnimation) =>  TakeOrderPage(),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    return SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(1.0, 0.0),
-                        end: Offset.zero,
-                      ).animate(animation),
-                      child: child,
-                    );
-                    },
-                  ),
+                  MaterialPageRoute(builder: (context) => TakeOrderPage()),
                 );
               },
               child: const Text('Take Order'),
