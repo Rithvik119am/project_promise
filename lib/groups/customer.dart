@@ -23,6 +23,7 @@ class Order {
   List<GraniteOrder>? graniteOrders;
   double totalAmount = 0.0;
   double calculatTotalAmount() {
+    totalAmount = 0.0;
     for (final g in graniteOrders!) {
       totalAmount += g.price;
     }

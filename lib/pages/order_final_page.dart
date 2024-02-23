@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_promise/groups/customer.dart';
+import 'package:project_promise/pages/gst_transpart_page.dart';
 
 class OrderPage extends StatelessWidget {
   final Order order;
@@ -54,17 +55,31 @@ class OrderPage extends StatelessWidget {
                       }).toList(),
                     ),
                   ),
+                const SizedBox(height: 10),
                 Center(
-                  child: Text(
-                    'Value: ₹ ${order.calculatTotalAmount()}',
-                    style: const TextStyle(fontSize: 24),
+                    child: Row(children: [
+                  const Text(
+                    'Value: ',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                ),
+                  Text(
+                    '₹ ${order.calculatTotalAmount()}',
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.normal),
+                  ),
+                ])),
                 Container(
                   margin: const EdgeInsets.all(16),
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => GstTranspartPage(order: order),
+                        ),
+                      );
+                    },
                     child: const Text('Next'),
                   ),
                 ),
