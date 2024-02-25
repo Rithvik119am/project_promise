@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_promise/groups/customer.dart';
+import 'package:project_promise/pages/send_database.dart';
 
 class GstTranspartPage extends StatefulWidget {
   const GstTranspartPage({super.key, required this.order});
@@ -127,12 +128,15 @@ class GstTranspartPageState extends State<GstTranspartPage> {
                       margin: const EdgeInsets.all(16),
                       child: ElevatedButton(
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) =>,
-                          //   ),
-                          // );
+                          widget.order.totalAmount = totalCost;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SendDatabasePage(
+                                order: widget.order,
+                              ),
+                            ),
+                          );
                         },
                         child: const Text('Submit'),
                       ),

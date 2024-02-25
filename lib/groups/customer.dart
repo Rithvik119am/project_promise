@@ -15,6 +15,14 @@ class Customer {
   String toString() {
     return 'Name: $name, Mobile Number: $mobileNumber, Address: $address';
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'mobileNumber': mobileNumber,
+      'address': address,
+    };
+  }
 }
 
 class Order {
@@ -35,4 +43,15 @@ class Order {
     required this.numberOfGraniteTypes,
     this.graniteOrders,
   });
+  Map<String, dynamic> toJson() {
+    return {
+      'customer': customer.toJson(),
+      'numberOfGraniteTypes': numberOfGraniteTypes,
+      'graniteOrders': graniteOrders?.map((order) => order.toJson()).toList(),
+      'totalAmount': totalAmount,
+      'some': graniteOrders?.length ?? 0
+    };
+  }
+
+  // Method to convert JSON to Order object
 }

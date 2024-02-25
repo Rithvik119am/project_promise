@@ -218,6 +218,19 @@ class GraniteOrder {
   set setNumberOfSlabs(int newNumberOfSlabs) {
     numberOfSlabs = newNumberOfSlabs;
   }
+
+  map(Map<String, dynamic> Function(dynamic graniteOrder) param0) {}
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'numberOfSlabs': numberOfSlabs,
+      'dimensions': dimensionsJson,
+      'squareFeet': squareFeet,
+      'perSqurare': perSqurare,
+      'price': price,
+    };
+  }
 }
 
 class Pair<T1, T2> {
