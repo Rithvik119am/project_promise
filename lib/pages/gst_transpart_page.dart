@@ -27,125 +27,127 @@ class GstTranspartPageState extends State<GstTranspartPage> {
 
   @override
   Widget build(BuildContext context) {
+    calculateTotalCost();
     return Scaffold(
       appBar: AppBar(
         title: const Text('GST and Transpotation Page'),
       ),
       body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('GST (%):', style: TextStyle(fontSize: 18)),
-              TextField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.all(10),
-                ),
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  gstPercentage = double.tryParse(value) ?? 0.0;
-                  setState(() {
-                    calculateTotalCost();
-                  });
-                },
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('GST (%):', style: TextStyle(fontSize: 18)),
+            TextField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.all(10),
               ),
-              const SizedBox(height: 10),
-              const Text('Transportation Cost:',
-                  style: TextStyle(fontSize: 18)),
-              TextField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.all(10),
-                ),
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  transpotationCost = double.tryParse(value) ?? 0.0;
-                  setState(() {
-                    calculateTotalCost();
-                  });
-                },
+              keyboardType: TextInputType.number,
+              onChanged: (value) {
+                gstPercentage = double.tryParse(value) ?? 0.0;
+                setState(() {
+                  calculateTotalCost();
+                });
+              },
+            ),
+            const SizedBox(height: 10),
+            const Text('Transportation Cost:', style: TextStyle(fontSize: 18)),
+            TextField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.all(10),
               ),
-              const SizedBox(height: 10),
-              const Text('Load Cost:', style: TextStyle(fontSize: 18)),
-              TextField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.all(10),
-                ),
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  loadCost = double.tryParse(value) ?? 0.0;
-                  setState(() {
-                    calculateTotalCost();
-                  });
-                },
+              keyboardType: TextInputType.number,
+              onChanged: (value) {
+                transpotationCost = double.tryParse(value) ?? 0.0;
+                setState(() {
+                  calculateTotalCost();
+                });
+              },
+            ),
+            const SizedBox(height: 10),
+            const Text('Load Cost:', style: TextStyle(fontSize: 18)),
+            TextField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.all(10),
               ),
-              const SizedBox(height: 10),
-              const Text('Unload Cost:', style: TextStyle(fontSize: 18)),
-              TextField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.all(10),
-                ),
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  unloadCost = double.tryParse(value) ?? 0.0;
-                  setState(() {
-                    calculateTotalCost();
-                  });
-                },
+              keyboardType: TextInputType.number,
+              onChanged: (value) {
+                loadCost = double.tryParse(value) ?? 0.0;
+                setState(() {
+                  calculateTotalCost();
+                });
+              },
+            ),
+            const SizedBox(height: 10),
+            const Text('Unload Cost:', style: TextStyle(fontSize: 18)),
+            TextField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.all(10),
               ),
-              const SizedBox(height: 20),
-              Row(children: [
-                const Text(
-                  'Total Cost: ',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  '₹ $totalCost',
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.normal),
-                )
-              ]),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.all(16),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Create PDF'),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.all(16),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          widget.order.totalAmount = totalCost;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SendDatabasePage(
-                                order: widget.order,
-                              ),
-                            ),
-                          );
-                        },
-                        child: const Text('Submit'),
-                      ),
-                    ),
-                  ),
-                ],
+              keyboardType: TextInputType.number,
+              onChanged: (value) {
+                unloadCost = double.tryParse(value) ?? 0.0;
+                setState(() {
+                  calculateTotalCost();
+                });
+              },
+            ),
+            const SizedBox(height: 20),
+            Row(children: [
+              const Text(
+                'Total Cost: ',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '₹ $totalCost',
+                style: const TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.normal),
               )
-            ],
-          )),
+            ]),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Create PDF'),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        widget.order.totalAmount = totalCost;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SendDatabasePage(
+                              order: widget.order,
+                            ),
+                          ),
+                        );
+                      },
+                      child: const Text('Submit'),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        )),
+      ),
     );
   }
 }

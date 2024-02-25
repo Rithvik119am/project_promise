@@ -24,7 +24,7 @@ class TakeOrderPage extends StatelessWidget {
           width: 350.0,
           height: 400.0,
           decoration: BoxDecoration(
-            color: Colors.red[700],
+            color: Colors.lightBlue[100], // Changed color here
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Column(
@@ -68,6 +68,10 @@ class TakeOrderPage extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(
+                      255, 207, 175, 68), // Changed color here
+                ),
                 onPressed: () {
                   Customer customer = Customer(
                     name: nameController.text,
@@ -83,7 +87,10 @@ class TakeOrderPage extends StatelessWidget {
                     ),
                   );
                 },
-                child: const Text('Submit'),
+                child: const Text(
+                  'Submit',
+                  selectionColor: Color.fromARGB(255, 216, 22, 22),
+                ),
               ),
             ],
           ),
