@@ -24,7 +24,7 @@ class TakeOrderPage extends StatelessWidget {
           width: 350.0,
           height: 400.0,
           decoration: BoxDecoration(
-            color: Colors.lightBlue[100], // Changed color here
+            color: Colors.lightBlue[100],
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Column(
@@ -69,8 +69,7 @@ class TakeOrderPage extends StatelessWidget {
               const SizedBox(height: 16.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(
-                      255, 207, 175, 68), // Changed color here
+                  backgroundColor: const Color.fromARGB(255, 207, 175, 68),
                 ),
                 onPressed: () {
                   Customer customer = Customer(

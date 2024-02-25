@@ -52,6 +52,4 @@ class Order {
       'some': graniteOrders?.length ?? 0
     };
   }
-
-  // Method to convert JSON to Order object
 }

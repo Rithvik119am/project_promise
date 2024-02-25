@@ -1,4 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
@@ -33,7 +32,7 @@ class _GraniteOrderFormState extends State<GraniteOrderForm> {
                   child: GraniteOrderInputWidget(
                     onSubmit: (order) {
                       addOrder(order);
-                      Navigator.pop(context); // Close the bottom sheet
+                      Navigator.pop(context);
                     },
                   ),
                 );
@@ -42,7 +41,6 @@ class _GraniteOrderFormState extends State<GraniteOrderForm> {
           },
         ),
         const Divider(),
-        // Display existing orders here if needed
       ],
     );
   }
@@ -68,7 +66,7 @@ class _GraniteOrderInputWidgetState extends State<GraniteOrderInputWidget> {
   void initState() {
     super.initState();
     numberOfSlabs = 1;
-    dimensions = [Pair(0.0, 0.0)]; // Initialize with one pair of dimensions
+    dimensions = [Pair(0.0, 0.0)];
   }
 
   @override
@@ -92,15 +90,13 @@ class _GraniteOrderInputWidgetState extends State<GraniteOrderInputWidget> {
               numberOfSlabs = int.parse(value);
               dimensions = List.generate(
                 numberOfSlabs,
-                (index) =>
-                    Pair(0.0, 0.0), // Initialize dimensions for each slab
+                (index) => Pair(0.0, 0.0),
               );
             });
           },
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height *
-              0.6, // Adjust the height as needed
+          height: MediaQuery.of(context).size.height * 0.6,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

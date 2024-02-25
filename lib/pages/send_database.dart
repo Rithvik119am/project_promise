@@ -8,7 +8,6 @@ class SendDatabasePage extends StatefulWidget {
   const SendDatabasePage({super.key, required this.order});
 
   @override
-  // ignore: library_private_types_in_public_api
   _SendDatabasePageState createState() => _SendDatabasePageState();
 }
 

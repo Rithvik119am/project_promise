@@ -49,7 +49,7 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                     (index) => GraniteOrder(
                       name: '',
                       numberOfSlabs: 0,
-                      dimensions: [], // Initialize dimensions with empty list
+                      dimensions: [],
                       squareFeet: 0.0,
                     ),
                   );
@@ -92,7 +92,6 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               setState(() {
                                 graniteOrders[index].numberOfSlabs =
                                     int.tryParse(value) ?? 0;
-                                // Initialize dimensions list
                                 graniteOrders[index].dimensions = List.generate(
                                   graniteOrders[index].numberOfSlabs,
                                   (_) => Pair(0.0, 0.0),
@@ -112,7 +111,6 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               });
                             },
                           ),
-                          // Input fields for dimensions
                           for (int i = 0;
                               i < graniteOrders[index].numberOfSlabs;
                               i++)
