@@ -76,7 +76,7 @@ class Order {
       Map<String, dynamic> cusData, List<Map<String, dynamic>> graniteData) {
     final customer = Customer(
       name: cusData['coustomer_name'],
-      mobileNumber: "",
+      mobileNumber: cusData['Mobile_number'],
       address: cusData['Address'],
       date: DateTime.parse(cusData['order_date']),
     );
