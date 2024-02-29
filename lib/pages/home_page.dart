@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_promise/pages/take_order.dart';
+import 'package:project_promise/pages/take_order/take_order.dart';
+import 'package:project_promise/pages/view_order/view_order.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,13 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ViewOrderPage()),
+                );
+              },
               child: const Text('View Order'),
             ),
           ],

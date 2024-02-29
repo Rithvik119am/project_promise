@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_promise/groups/customer.dart';
-import 'package:project_promise/pages/send_database.dart';
+import 'package:project_promise/pages/take_order/send_database.dart';
 
 class GstTranspartPage extends StatefulWidget {
   const GstTranspartPage({super.key, required this.order});
@@ -13,7 +13,6 @@ class GstTranspartPageState extends State<GstTranspartPage> {
   double gstPercentage = 0.0;
   double transpotationCost = 0.0;
   double loadCost = 0.0;
-  double unloadCost = 0.0;
   double totalCost = 0.0;
 
   void calculateTotalCost() {
@@ -21,8 +20,7 @@ class GstTranspartPageState extends State<GstTranspartPage> {
     totalCost = widget.order.totalAmount +
         widget.order.totalAmount * gstPercentage / 100 +
         transpotationCost +
-        loadCost +
-        unloadCost;
+        loadCost;
   }
 
   @override
@@ -68,7 +66,8 @@ class GstTranspartPageState extends State<GstTranspartPage> {
               },
             ),
             const SizedBox(height: 10),
-            const Text('Load Cost:', style: TextStyle(fontSize: 18)),
+            const Text('Loading and unloading code Cost:',
+                style: TextStyle(fontSize: 18)),
             TextField(
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -77,21 +76,6 @@ class GstTranspartPageState extends State<GstTranspartPage> {
               keyboardType: TextInputType.number,
               onChanged: (value) {
                 loadCost = double.tryParse(value) ?? 0.0;
-                setState(() {
-                  calculateTotalCost();
-                });
-              },
-            ),
-            const SizedBox(height: 10),
-            const Text('Unload Cost:', style: TextStyle(fontSize: 18)),
-            TextField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.all(10),
-              ),
-              keyboardType: TextInputType.number,
-              onChanged: (value) {
-                unloadCost = double.tryParse(value) ?? 0.0;
                 setState(() {
                   calculateTotalCost();
                 });
@@ -117,7 +101,8 @@ class GstTranspartPageState extends State<GstTranspartPage> {
                     margin: const EdgeInsets.all(16),
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        widget.order.totalAmount = totalCost;
+                        //generatePdf(widget.order);
                       },
                       child: const Text('Create PDF'),
                     ),

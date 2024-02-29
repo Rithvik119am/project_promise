@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project_promise/pages/order_final_page.dart';
+import 'package:project_promise/pages/take_order/order_final_page.dart';
 import 'package:project_promise/groups/customer.dart';
 import 'package:project_promise/groups/granite.dart';
 
 class TakeDetailsPage extends StatefulWidget {
-  const TakeDetailsPage({Key? key, required this.customerInfo})
-      : super(key: key);
+  const TakeDetailsPage({super.key, required this.customerInfo});
 
   final Customer customerInfo;
   @override
@@ -44,15 +43,21 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                 setState(() {
                   _inputNumber = int.tryParse(value) ?? 0;
                   graniteType = List.generate(_inputNumber, (index) => '');
-                  graniteOrders = List.generate(
-                    _inputNumber,
-                    (index) => GraniteOrder(
-                      name: '',
-                      numberOfSlabs: 0,
-                      dimensions: [],
-                      squareFeet: 0.0,
-                    ),
-                  );
+                  if (_inputNumber > graniteOrders.length) {
+                    graniteOrders.addAll(
+                      List.generate(
+                        _inputNumber - graniteOrders.length,
+                        (index) => GraniteOrder(
+                          name: '',
+                          numberOfSlabs: 0,
+                          squareFeet: 0.0,
+                        ),
+                      ),
+                    );
+                  } else {
+                    graniteOrders.removeRange(
+                        _inputNumber, graniteOrders.length);
+                  }
                 });
               },
             ),
@@ -92,10 +97,18 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               setState(() {
                                 graniteOrders[index].numberOfSlabs =
                                     int.tryParse(value) ?? 0;
-                                graniteOrders[index].dimensions = List.generate(
-                                  graniteOrders[index].numberOfSlabs,
-                                  (_) => Pair(0.0, 0.0),
-                                );
+                              });
+                            },
+                          ),
+                          TextField(
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              labelText: 'Square Feet',
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                graniteOrders[index].squareFeet =
+                                    double.tryParse(value) ?? 0.0;
                               });
                             },
                           ),
@@ -111,46 +124,6 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               });
                             },
                           ),
-                          for (int i = 0;
-                              i < graniteOrders[index].numberOfSlabs;
-                              i++)
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                    keyboardType: TextInputType.number,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Length',
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        graniteOrders[index]
-                                                .dimensions[i]
-                                                .first =
-                                            double.tryParse(value) ?? 0.0;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(width: 16.0),
-                                Expanded(
-                                  child: TextField(
-                                    keyboardType: TextInputType.number,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Width',
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        graniteOrders[index]
-                                                .dimensions[i]
-                                                .second =
-                                            double.tryParse(value) ?? 0.0;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
                         ],
                       ),
                     );
@@ -160,7 +133,6 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
             ElevatedButton(
               onPressed: () {
                 for (int temp = 0; temp < _inputNumber; temp++) {
-                  graniteOrders[temp].calculateSquareFeet();
                   graniteOrders[temp].calculatePrice();
                 }
                 Order orderFullInfo = Order(

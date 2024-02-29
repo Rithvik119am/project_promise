@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:project_promise/pages/take_details.dart';
+import 'package:project_promise/pages/take_order/take_details.dart';
 import 'package:project_promise/groups/customer.dart';
 
 class TakeOrderPage extends StatelessWidget {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
-  final TextEditingController numberController = TextEditingController();
-
-  TakeOrderPage({Key? key}) : super(key: key);
+  Customer customer =
+      Customer(name: '', mobileNumber: '', address: '', date: DateTime.now());
+  TakeOrderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,6 @@ class TakeOrderPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
-                controller: nameController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -40,10 +37,10 @@ class TakeOrderPage extends StatelessWidget {
                       horizontal: 16.0, vertical: 8.0),
                   labelText: 'Enter the name',
                 ),
+                onChanged: (value) => customer.name = value,
               ),
               const SizedBox(height: 16.0),
               TextField(
-                controller: addressController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -52,11 +49,11 @@ class TakeOrderPage extends StatelessWidget {
                       horizontal: 16.0, vertical: 8.0),
                   labelText: 'Enter the address',
                 ),
+                onChanged: (value) => customer.address = value,
               ),
               const SizedBox(height: 16.0),
               TextField(
                 keyboardType: TextInputType.number,
-                controller: numberController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -65,6 +62,7 @@ class TakeOrderPage extends StatelessWidget {
                       horizontal: 16.0, vertical: 8.0),
                   labelText: 'Enter the Mobile Number',
                 ),
+                onChanged: (value) => customer.mobileNumber = value,
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
@@ -72,11 +70,6 @@ class TakeOrderPage extends StatelessWidget {
                   backgroundColor: const Color.fromARGB(255, 207, 175, 68),
                 ),
                 onPressed: () {
-                  Customer customer = Customer(
-                    name: nameController.text,
-                    mobileNumber: numberController.text,
-                    address: addressController.text,
-                  );
                   Navigator.push(
                     context,
                     MaterialPageRoute(

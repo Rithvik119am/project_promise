@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_promise/groups/customer.dart';
-import 'package:project_promise/groups/database.dart';
+//import 'package:project_promise/groups/database.dart';
+import 'package:project_promise/groups/database_app.dart';
 
 class SendDatabasePage extends StatefulWidget {
   final Order order;
@@ -17,7 +18,7 @@ class _SendDatabasePageState extends State<SendDatabasePage> {
   @override
   void initState() {
     super.initState();
-    futureData = sendData(widget.order);
+    futureData = temp(widget.order);
   }
 
   @override
@@ -37,6 +38,39 @@ class _SendDatabasePageState extends State<SendDatabasePage> {
             if (snapshot.hasError) {
               return Container();
             } else {
+              if (snapshot.data == 1) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Card(
+                        color: Color.fromARGB(255, 158, 63, 19),
+                        elevation: 10,
+                        margin: EdgeInsets.all(20),
+                        child: Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Text(
+                            'Data not sent',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            futureData = temp(widget.order);
+                          });
+                        },
+                        child: const Text('Tryagain'),
+                      ),
+                    ],
+                  ),
+                );
+              }
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
