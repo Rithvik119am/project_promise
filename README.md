@@ -34,7 +34,7 @@ The Database API has been removed from this project. If you need to add a databa
 
 ## Owner_info.dart
 
-The data in `Owner_info.dart` file has been removed from this project. If you need it for creating the PDF bills and to add owner information, you can do it in `owner_info.dart` and define the necessary classes and data.
+The data in `owner_info.dart` file has been removed from this project. If you need it for creating the PDF bills and to add owner information, you can do it in `owner_info.dart` and define the necessary classes and data.
 ```
 class OwnerInfo {
   final String name = "";
