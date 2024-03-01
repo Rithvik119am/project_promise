@@ -24,7 +24,7 @@ To get started with this project, follow the steps below:
  
  -  Take orders and save them on the cloud.
  -  Create the bill in the form of a PDF with a single click.
- -  Access the order details from any day, on any device, at any time.
+ -  Access the order details of any day, on any device, at any time.
  
 
 
