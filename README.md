@@ -16,9 +16,9 @@ To get started with this project, follow the steps below:
 
  This project includes the following features:
  
- - [Feature 1]: Take orders and save them on the cloud.
- - [Feature 2]: Create the bill in the form of a PDF with a single click.
- - [Feature 3]: Access the order details from any day, on any device, at any time.
+ -  Take orders and save them on the cloud.
+ -  Create the bill in the form of a PDF with a single click.
+ -  Access the order details from any day, on any device, at any time.
  
 
 
