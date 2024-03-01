@@ -1,6 +1,10 @@
 # project_promise
 
+
 This is a Flutter project called "project_promise".
+ 
+This project was created to digitalize the order taking, billing, and tax evaluations of a Granite Business.
+ 
 
 ## Getting Started
 
