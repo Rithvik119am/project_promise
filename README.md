@@ -5,7 +5,8 @@ This is a Flutter project called "project_promise".
  
 This project was created to digitalize the order taking, billing, and tax evaluations of a Granite Business.
 
- 
+# This code is currently under development.
+# Please note that it may not be fully functional or stable. 
 
 ## Getting Started
 
