@@ -114,6 +114,10 @@ class GstTranspartPageState extends State<GstTranspartPage> {
                     margin: const EdgeInsets.all(16),
                     child: ElevatedButton(
                       onPressed: () {
+                        widget.order.gst = gstPercentage;
+                        widget.order.transpotatio =
+                            (transpotationCost as num).toInt();
+                        widget.order.loadAndUnload = (loadCost as num).toInt();
                         widget.order.totalAmount = totalCost;
                         Navigator.push(
                           context,

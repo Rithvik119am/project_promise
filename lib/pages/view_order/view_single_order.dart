@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:project_promise/groups/customer.dart';
 
+Widget buildRow(String label, String value) {
+  //value = value.padRight(15 - value.length, ' ');
+  //print(value + "123");
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: <Widget>[
+      Text(
+        label,
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+      Text(
+        value,
+        style: const TextStyle(fontSize: 18),
+      ),
+    ],
+  );
+}
+
 class ViewSingleOrderPage extends StatelessWidget {
   final Order order;
 
@@ -34,13 +52,10 @@ class ViewSingleOrderPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('Name: ${order.customer.name}',
-                                style: const TextStyle(fontSize: 18)),
-                            Text(
-                                'Mobile Number: ${order.customer.mobileNumber}',
-                                style: const TextStyle(fontSize: 18)),
-                            Text('Address: ${order.customer.address}',
-                                style: const TextStyle(fontSize: 18)),
+                            buildRow('Name: ', order.customer.name),
+                            buildRow(
+                                'Mobile Number: ', order.customer.mobileNumber),
+                            buildRow('Address: ', order.customer.address),
                           ],
                         ),
                       ),
@@ -52,9 +67,10 @@ class ViewSingleOrderPage extends StatelessWidget {
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                        'Number of Granite Types: ${order.numberOfGraniteTypes}',
-                        style: const TextStyle(fontSize: 18)),
+                    Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: buildRow('Number of Granite Types: ',
+                            order.numberOfGraniteTypes.toString())),
                     if (order.graniteOrders != null &&
                         order.graniteOrders!.isNotEmpty)
                       SingleChildScrollView(
@@ -69,20 +85,16 @@ class ViewSingleOrderPage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text('Granite Name: ${graniteOrder.name}',
-                                        style: const TextStyle(fontSize: 18)),
-                                    Text(
-                                        'Number of Slabs: ${graniteOrder.numberOfSlabs}',
-                                        style: const TextStyle(fontSize: 18)),
-                                    Text(
-                                        'Square Feet: ${graniteOrder.squareFeet}',
-                                        style: const TextStyle(fontSize: 18)),
-                                    Text(
-                                        'Per Square Feet: ${graniteOrder.perSqurare}',
-                                        style: const TextStyle(fontSize: 18)),
-                                    Text(
-                                        'Per Granite price: ${graniteOrder.price}',
-                                        style: const TextStyle(fontSize: 18)),
+                                    buildRow(
+                                        'Granite Name: ', graniteOrder.name),
+                                    buildRow('Number of Slabs: ',
+                                        graniteOrder.numberOfSlabs.toString()),
+                                    buildRow('Square Feet: ',
+                                        graniteOrder.squareFeet.toString()),
+                                    buildRow('Per Square Feet: ',
+                                        graniteOrder.perSqurare.toString()),
+                                    buildRow('Per Granite price: ',
+                                        graniteOrder.price.toString()),
                                   ],
                                 ),
                               ),
@@ -90,13 +102,37 @@ class ViewSingleOrderPage extends StatelessWidget {
                           }).toList(),
                         ),
                       ),
+                    Card(
+                      margin: const EdgeInsets.all(10.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            const Text(
+                              'Other Costs:',
+                              style: TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 10),
+                            buildRow('GST: ', '${order.gst}%'),
+                            const SizedBox(height: 10),
+                            buildRow(
+                                'Transportation: ', '₹ ${order.transpotatio}'),
+                            const SizedBox(height: 10),
+                            buildRow('Loading and Unloading: ',
+                                '₹ ${order.loadAndUnload}'),
+                          ],
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 10),
                     Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           const Text(
-                            'Value: ',
+                            'Total Value: ',
                             style: TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold),
                           ),

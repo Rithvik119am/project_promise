@@ -35,6 +35,9 @@ class Order {
   int numberOfGraniteTypes;
   List<GraniteOrder>? graniteOrders;
   double totalAmount = 0.0;
+  double gst = 0.0;
+  int transpotatio = 0;
+  int loadAndUnload = 0;
   double calculatTotalAmount() {
     totalAmount = 0.0;
     for (final g in graniteOrders!) {
@@ -58,6 +61,13 @@ class Order {
     };
   }
 
+  double calculatTotalAmountNoneGst() {
+    return totalAmount -
+        ((totalAmount * gst) / 100) -
+        transpotatio -
+        loadAndUnload;
+  }
+
   List<Map<String, dynamic>> toJsonOrders(String id) {
     return graniteOrders!.map((order) => order.toJsonDatabase(id)).toList();
   }
@@ -69,6 +79,9 @@ class Order {
       'Address': customer.address,
       "order_date": DateTime.now().toString(),
       "order_value": totalAmount,
+      "transpotation": transpotatio,
+      "gst": gst,
+      "load_unload": loadAndUnload,
     };
   }
 
@@ -87,6 +100,9 @@ class Order {
       numberOfGraniteTypes: graniteOrders.length,
       graniteOrders: graniteOrders,
     );
+    temp.gst = (cusData['gst'] as num).toDouble();
+    temp.transpotatio = (cusData['transpotation'] as num).toInt();
+    temp.loadAndUnload = (cusData['load_unload'] as num).toInt();
     temp.totalAmount = (cusData['order_value'] as num).toDouble();
     return temp;
   }

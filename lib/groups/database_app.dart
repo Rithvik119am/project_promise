@@ -1,18 +1,20 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:project_promise/groups/customer.dart';
 
 Future<int> temp(Order dataa) async {
   final client = Client()
-      .setEndpoint("https://cloud.appwrite.io/v1")
-      .setProject("project-promise")
+      .setEndpoint(API_END_POINT)
+      .setProject(PROJECT_ID)
       .setSelfSigned(status: true);
   final databases = Databases(client);
 
   try {
     final customerDoc = await databases.createDocument(
-      databaseId: '65dca00e73512a903fae',
-      collectionId: '65dca03db9e19fbf10ec',
+      databaseId: DATABASE_ID,
+      collectionId: CUSTOMER_COLLECTION_ID,
       documentId: ID.unique(),
       data: dataa.toJsonCoustomers(),
     );
@@ -21,16 +23,16 @@ Future<int> temp(Order dataa) async {
         dataa.toJsonOrders(customerDoc.$id);
     for (var i in eachGranite) {
       final orderDoc = await databases.createDocument(
-        databaseId: '65dca00e73512a903fae',
-        collectionId: '65dca17966a16db176f3',
+        databaseId: DATABASE_ID,
+        collectionId: ORDER_COLLECTION_ID,
         documentId: ID.unique(),
         data: i,
       );
       orderIds.add(orderDoc.$id);
     }
     final customer = await databases.updateDocument(
-      databaseId: '65dca00e73512a903fae',
-      collectionId: '65dca03db9e19fbf10ec',
+      databaseId: DATABASE_ID,
+      collectionId: CUSTOMER_COLLECTION_ID,
       documentId: customerDoc.$id,
       data: {
         'graniteOrder': orderIds,
@@ -49,14 +51,14 @@ Future<List<Order>> getDataDatabase(DateTime date) async {
   DateTime nextDate =
       DateTime(date.year, date.month, date.day).add(const Duration(days: 1));
   final client = Client()
-      .setEndpoint("https://cloud.appwrite.io/v1")
-      .setProject("project-promise")
+      .setEndpoint(API_END_POINT)
+      .setProject(PROJECT_ID)
       .setSelfSigned(status: true);
   final databases = Databases(client);
   try {
     final response = await databases.listDocuments(
-        databaseId: '65dca00e73512a903fae',
-        collectionId: '65dca03db9e19fbf10ec',
+        databaseId: DATABASE_ID,
+        collectionId: CUSTOMER_COLLECTION_ID,
         queries: [
           Query.between(
               'order_date', previousDate.toString(), nextDate.toString())
