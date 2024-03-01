@@ -96,18 +96,6 @@ class GstTranspartPageState extends State<GstTranspartPage> {
             const SizedBox(height: 20),
             Row(
               children: [
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.all(16),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        widget.order.totalAmount = totalCost;
-                        //generatePdf(widget.order);
-                      },
-                      child: const Text('Create PDF'),
-                    ),
-                  ),
-                ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Container(
@@ -115,7 +103,7 @@ class GstTranspartPageState extends State<GstTranspartPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         widget.order.gst = gstPercentage;
-                        widget.order.transpotatio =
+                        widget.order.transpotation =
                             (transpotationCost as num).toInt();
                         widget.order.loadAndUnload = (loadCost as num).toInt();
                         widget.order.totalAmount = totalCost;

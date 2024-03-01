@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_promise/groups/customer.dart';
+import 'package:project_promise/pages/pdf_view_page.dart';
 
 Widget buildRow(String label, String value) {
   //value = value.padRight(15 - value.length, ' ');
@@ -118,7 +119,7 @@ class ViewSingleOrderPage extends StatelessWidget {
                             buildRow('GST: ', '${order.gst}%'),
                             const SizedBox(height: 10),
                             buildRow(
-                                'Transportation: ', '₹ ${order.transpotatio}'),
+                                'Transportation: ', '₹ ${order.transpotation}'),
                             const SizedBox(height: 10),
                             buildRow('Loading and Unloading: ',
                                 '₹ ${order.loadAndUnload}'),
@@ -137,7 +138,7 @@ class ViewSingleOrderPage extends StatelessWidget {
                                 fontSize: 24, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '₹ ${order.calculatTotalAmount()}',
+                            '₹ ${order.calculatTotalAmountGst()}',
                             style: const TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.normal),
                           ),
@@ -145,6 +146,21 @@ class ViewSingleOrderPage extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+                Container(
+                  margin: const EdgeInsets.all(16),
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PdfPageForView(order: order),
+                        ),
+                      );
+                    },
+                    child: const Text('Make a PDF of this Order'),
+                  ),
                 ),
                 Container(
                   margin: const EdgeInsets.all(16),

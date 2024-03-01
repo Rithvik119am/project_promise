@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_promise/groups/customer.dart';
 //import 'package:project_promise/groups/database.dart';
+import 'package:project_promise/pages/pdf_view_page.dart';
 import 'package:project_promise/groups/database_app.dart';
 
 class SendDatabasePage extends StatefulWidget {
@@ -96,6 +97,18 @@ class _SendDatabasePageState extends State<SendDatabasePage> {
                         Navigator.popUntil(context, (route) => route.isFirst);
                       },
                       child: const Text('Go to Start Page'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                PdfPageForView(order: widget.order),
+                          ),
+                        );
+                      },
+                      child: const Text('Create a PDF'),
                     ),
                   ],
                 ),

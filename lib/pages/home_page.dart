@@ -38,13 +38,7 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PdfPageForView()),
-                );
-              },
+              onPressed: () {},
               child: const Text('Pdf test'),
             ),
           ],
