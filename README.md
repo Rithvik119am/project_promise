@@ -24,11 +24,18 @@ To get started with this project, follow the steps below:
 
 ## Database API
 
-The Database API has been removed from this project. If you need to add a database functionality, you can consider using packages like `sqflite` or `firebase_database`.
+The Database API has been removed from this project. If you need to add a database functionality, I have use `appwrite` ad the Baas for the project.
 
 ## Owner_info.dart
 
-The `Owner_info.dart` file has been removed from this project. If you need to add owner information, you can create a new file called `owner_info.dart` and define the necessary classes and functions.
+The data in `Owner_info.dart` file has been removed from this project. If you need it for creating the PDF bills and to add owner information, you can do it in `owner_info.dart` and define the necessary classes and data.
+```
+class OwnerInfo {
+  final String name = "";
+  final String mobileNumber = "";
+  final String address = "";
+}
+```
 
 ## Contributing
 
@@ -39,4 +46,4 @@ Contributions are welcome! If you would like to contribute to this project, plea
 3. Make your changes and commit them.
 4. Push your changes to your forked repository.
 5. Submit a pull request.
-
+6.I Would be very happy to get any help.
