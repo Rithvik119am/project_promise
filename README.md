@@ -30,7 +30,7 @@ To get started with this project, follow the steps below:
 
 ## Database API
 
-The Database API has been removed from this project. If you need to add a database functionality, I have use `appwrite` ad the Baas for the project.
+The Database API has been removed from this project. If you need to add a database functionality, We have use `appwrite` ad the Baas for the project.
 
 ## Owner_info.dart
 
@@ -52,4 +52,4 @@ Contributions are welcome! If you would like to contribute to this project, plea
 3. Make your changes and commit them.
 4. Push your changes to your forked repository.
 5. Submit a pull request.
-6. I Would be very happy to get any help.
+6. We Would be very happy to get any help.
