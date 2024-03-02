@@ -3,8 +3,9 @@
 import 'dart:typed_data';
 import 'package:pdf/widgets.dart';
 import 'package:project_promise/groups/customer.dart';
+import 'package:project_promise/groups/granite.dart';
 import 'package:project_promise/groups/owner_info.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' as intl;
 
 class PdfCreater {
   static Future<Uint8List> generateDocument() async {
@@ -68,7 +69,7 @@ Future<Uint8List> makePdfForOrder(Order data) async {
               Text('Date: ',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
               Text(
-                DateFormat('dd-MM-yyyy').format(data.customer.date),
+                intl.DateFormat('dd-MM-yyyy').format(data.customer.date),
                 style: const TextStyle(fontSize: 12),
               ),
             ]),
@@ -251,6 +252,78 @@ Future<Uint8List> makePdfForOrder(Order data) async {
         )
       ]);
     }),
+  );
+  return await pdf.save();
+}
+
+Future<Uint8List> makePdfMesurementSheets(List<GraniteOrder> data) async {
+  final pdf = Document();
+  pdf.addPage(
+    MultiPage(
+      build: (context) => [
+        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          Text('Date: ',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 8.0)),
+          Text(intl.DateFormat('dd-MM-yyyy').format(DateTime.now()))
+        ]),
+        for (var item in data)
+          Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Text(
+              'Granite Name: ${item.name}',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+              ),
+            ),
+            //print a table with sno, lengthXwidth, pair.squarefeet as coloum names
+            Table(
+              border: TableBorder.all(),
+              children: [
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Sno',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Length X Width',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('SquareFeet',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15)),
+                    ),
+                  ],
+                ),
+                for (int i = 0; i < item.numberOfSlabs; i++)
+                  TableRow(children: [
+                    Text((i + 1).toString(),
+                        style: const TextStyle(fontSize: 15)),
+                    Text(
+                        '${item.dimensions![i].first} X ${item.dimensions![i].second}',
+                        style: const TextStyle(fontSize: 15)),
+                    Text(item.dimensions![i].squareFeet().toStringAsFixed(2),
+                        style: const TextStyle(fontSize: 15)),
+                  ]),
+                TableRow(children: [
+                  Text('', style: const TextStyle(fontSize: 15)),
+                  Text('Total SquareFeet',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                  Text(item.squareFeet.toStringAsFixed(2),
+                      style: const TextStyle(fontSize: 15)),
+                ]),
+              ],
+            ),
+          ])
+      ], /////////
+    ),
   );
   return await pdf.save();
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_promise/groups/customer.dart';
 import 'package:project_promise/pages/pdf_view_page.dart';
+import 'package:project_promise/groups/database_app.dart';
 
 Widget buildRow(String label, String value) {
   //value = value.padRight(15 - value.length, ' ');
@@ -22,8 +23,10 @@ Widget buildRow(String label, String value) {
 
 class ViewSingleOrderPage extends StatelessWidget {
   final Order order;
+  final int index;
 
-  const ViewSingleOrderPage({super.key, required this.order});
+  const ViewSingleOrderPage(
+      {super.key, required this.order, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +151,7 @@ class ViewSingleOrderPage extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  margin: const EdgeInsets.all(16),
+                  margin: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
@@ -163,13 +166,38 @@ class ViewSingleOrderPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.all(16),
+                  margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Confirm'),
+                            content:
+                                const Text('Do you want to delete this order?'),
+                            actions: [
+                              TextButton(
+                                child: const Text('Cancel'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: const Text('Delete'),
+                                onPressed: () {
+                                  deleteOrderDatabase(order.id ?? '');
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop(index);
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
-                    child: const Text('Back to View Orders'),
+                    child: const Text('Delete Order'),
                   ),
                 ),
               ],

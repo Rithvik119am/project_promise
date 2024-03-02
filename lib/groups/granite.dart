@@ -1,9 +1,12 @@
+import 'dart:ffi';
+
 class GraniteOrder {
   String name;
   int numberOfSlabs;
   double squareFeet;
   double perSqurare = 0.0;
   double price = 0.0;
+  List<Pair>? dimensions = [];
 
   GraniteOrder({
     required this.name,
@@ -12,6 +15,13 @@ class GraniteOrder {
   });
   set setName(String newName) {
     name = newName;
+  }
+
+  void setSquareFeetWithDimentions() {
+    squareFeet = 0;
+    for (var i in dimensions!) {
+      squareFeet += i.squareFeet();
+    }
   }
 
   void calculatePrice() {
@@ -62,4 +72,7 @@ class Pair<T1, T2> {
   T2 second;
 
   Pair(this.first, this.second);
+  double squareFeet() {
+    return (first as double) * (second as double) / 144;
+  }
 }

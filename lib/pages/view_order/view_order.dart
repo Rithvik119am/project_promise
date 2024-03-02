@@ -13,13 +13,14 @@ class ViewOrderPage extends StatefulWidget {
 class _ViewOrderPageState extends State<ViewOrderPage> {
   bool isLoading = false;
   List<Order> data = [];
+  DateTime? previourRequestDate;
 
   Future<void> fetchData(DateTime selectedDate) async {
     setState(() {
       isLoading = true;
     });
+    previourRequestDate = selectedDate;
     final response = await getDataDatabase(selectedDate);
-
     setState(() {
       data = response;
       isLoading = false;
@@ -69,9 +70,16 @@ class _ViewOrderPageState extends State<ViewOrderPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => ViewSingleOrderPage(
-                                order: data[index],
-                              ),
+                                  order: data[index], index: index),
                             ),
+                          ).then(
+                            (value) {
+                              if (value != null) {
+                                setState(() {
+                                  data.removeAt(index);
+                                });
+                              }
+                            },
                           );
                         },
                         child: Padding(
@@ -88,11 +96,12 @@ class _ViewOrderPageState extends State<ViewOrderPage> {
                                     style: DefaultTextStyle.of(context)
                                         .style
                                         .copyWith(fontWeight: FontWeight.bold),
-                                    children: <TextSpan>[
+                                    children: [
                                       TextSpan(
-                                          text: data[index].customer.name,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.normal)),
+                                        text: data[index].customer.name,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.normal),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -106,12 +115,13 @@ class _ViewOrderPageState extends State<ViewOrderPage> {
                                     style: DefaultTextStyle.of(context)
                                         .style
                                         .copyWith(fontWeight: FontWeight.bold),
-                                    children: <TextSpan>[
+                                    children: [
                                       TextSpan(
-                                          text:
-                                              '₹ ${data[index].totalAmount.toString()}',
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.normal)),
+                                        text:
+                                            '₹ ${data[index].totalAmount.toString()}',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.normal),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -125,14 +135,15 @@ class _ViewOrderPageState extends State<ViewOrderPage> {
                                     style: DefaultTextStyle.of(context)
                                         .style
                                         .copyWith(fontWeight: FontWeight.bold),
-                                    children: <TextSpan>[
+                                    children: [
                                       TextSpan(
-                                          text: data[index]
-                                              .customer
-                                              .mobileNumber
-                                              .toString(),
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.normal)),
+                                        text: data[index]
+                                            .customer
+                                            .mobileNumber
+                                            .toString(),
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.normal),
+                                      ),
                                     ],
                                   ),
                                 ),

@@ -45,6 +45,22 @@ Future<int> temp(Order dataa) async {
   return 0;
 }
 
+void deleteOrderDatabase(String id) async {
+  final client = Client()
+      .setEndpoint(API_END_POINT)
+      .setProject(PROJECT_ID)
+      .setSelfSigned(status: true);
+  final databases = Databases(client);
+  try {
+    final response = await databases.deleteDocument(
+        databaseId: DATABASE_ID,
+        collectionId: CUSTOMER_COLLECTION_ID,
+        documentId: id);
+  } catch (e) {
+    print("Error in deleting order: $e");
+  }
+}
+
 Future<List<Order>> getDataDatabase(DateTime date) async {
   List<Order> orders = [];
   DateTime previousDate = DateTime(date.year, date.month, date.day);

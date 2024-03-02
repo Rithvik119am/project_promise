@@ -65,6 +65,28 @@ class TakeOrderPage extends StatelessWidget {
                 onChanged: (value) => customer.mobileNumber = value,
               ),
               const SizedBox(height: 16.0),
+              TextButton(
+                onPressed: () {
+                  showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2100),
+                  ).then((value) {
+                    if (value != null) {
+                      customer.date = value;
+                    }
+                  });
+                },
+                child: Text(
+                  'Date: ${customer.date.day}/${customer.date.month}/${customer.date.year}',
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 207, 175, 68),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_promise/pages/take_order/take_order.dart';
 import 'package:project_promise/pages/view_order/view_order.dart';
-import 'package:project_promise/pages/pdf_view_page.dart';
+import 'package:project_promise/pages/measurement_sheet/measurement_taker.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -38,8 +38,14 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
-              child: const Text('Pdf test'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MeasurementSheet()),
+                );
+              },
+              child: const Text('Measurements Sheet'),
             ),
           ],
         ),
