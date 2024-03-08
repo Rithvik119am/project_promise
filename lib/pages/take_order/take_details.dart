@@ -78,12 +78,43 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               fontSize: 16.0,
                             ),
                           ),
-                          TextField(
+                         /*TextField(
                             decoration: const InputDecoration(
                               labelText: 'Name',
                             ),
+                             onChanged: (value) {
+                               setState(() {
+                                 graniteOrders[index].name = value;
+                               });
+                             },
+                           ),
+                           ),*/
+                          DropdownButton<String>(
+                            hint: const Text('Select Granite Type'),
+                            value: graniteType[index],
+                            items: <String>[
+                              'Black Galaxy',
+                              'Nano White',
+                              'Tan Brown',
+                              'Z-Black',
+                              'Black Pearl',
+                              'Artificial Box',
+                              'Maha Ghani',
+                              'Cell White',
+                              'Bose Pradise',
+                              'Fish Black',
+                              'Tan Brown Lapothra',
+                              'Cell White Flemming',
+                              // ... many more to come
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
                             onChanged: (value) {
                               setState(() {
+                                graniteType[index] = value!;
                                 graniteOrders[index].name = value;
                               });
                             },
@@ -112,6 +143,7 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               });
                             },
                           ),
+                          // ignore: prefer_const_constructors
                           TextField(
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
