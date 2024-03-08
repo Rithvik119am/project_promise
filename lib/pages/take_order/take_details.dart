@@ -78,6 +78,17 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               fontSize: 16.0,
                             ),
                           ),
+                         /*TextField(
+                            decoration: const InputDecoration(
+                              labelText: 'Name',
+                            ),
+                             onChanged: (value) {
+                               setState(() {
+                                 graniteOrders[index].name = value;
+                               });
+                             },
+                           ),
+                           ),*/
                           DropdownButton<String>(
                             hint: const Text('Select Granite Type'),
                             value: graniteType[index],
@@ -105,16 +116,9 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               setState(() {
                                 graniteType[index] = value!;
                                 graniteOrders[index].name = value;
-                          /*TextField(
-                            decoration: const InputDecoration(
-                              labelText: 'Name',
-                            ),
-                            onChanged: (value) {
-                              setState(() {
-                                graniteOrders[index].name = value;
                               });
                             },
-                          ),*/
+                          ),
                           TextField(
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
@@ -145,6 +149,12 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                             decoration: const InputDecoration(
                               labelText: 'PerSquare feet',
                             ),
+                            onChanged: (value) {
+                              setState(() {
+                                graniteOrders[index].perSqurare =
+                                    double.tryParse(value) ?? 0.0;
+                              });
+                            },
                           ),
                         ],
                       ),
