@@ -4,12 +4,6 @@ import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:project_promise/groups/customer.dart';
 
-String API_END_POINT = "https://cloud.appwrite.io/v1";
-String PROJECT_ID = "project-promise";
-String CUSTOMER_COLLECTION_ID = "65dca03db9e19fbf10ec";
-String ORDER_COLLECTION_ID = "65dca17966a16db176f3";
-String DATABASE_ID = "65dca00e73512a903fae";
-
 Future<int> temp(Order dataa) async {
   final client = Client()
       .setEndpoint(API_END_POINT)
