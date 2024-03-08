@@ -138,6 +138,12 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                             decoration: const InputDecoration(
                               labelText: 'PerSquare feet',
                             ),
+                            onChanged: (value) {
+                              setState(() {
+                                graniteOrders[index].perSqurare =
+                                    double.tryParse(value) ?? 0.0;
+                              });
+                            },
                           ),
                         ],
                       ),
