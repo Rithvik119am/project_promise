@@ -15,6 +15,18 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
   int _inputNumber = 0;
   late List<GraniteOrder> graniteOrders;
   late List<String> graniteType;
+  final graniteNames = [
+    'Black Galaxy',
+    'Black Pearl',
+    'Colonial Gold',
+    'Colonial White',
+    'Kashmir White',
+    'Kashmir Gold',
+    'Madura Gold',
+    'Tan Brown',
+    'Viscon White',
+    'White Galaxy',
+  ];
 
   @override
   void initState() {
@@ -78,7 +90,7 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               fontSize: 16.0,
                             ),
                           ),
-                          TextField(
+                          /*TextField(
                             decoration: const InputDecoration(
                               labelText: 'Name',
                             ),
@@ -87,7 +99,20 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                                 graniteOrders[index].name = value;
                               });
                             },
-                          ),
+                          ),*/
+                          DropdownMenu(
+                              onSelected: (value) => {
+                                    setState(() {
+                                      graniteOrders[index].name = value!;
+                                    }),
+                                  },
+                              dropdownMenuEntries: <DropdownMenuEntry<String>>[
+                                for (var i in graniteNames)
+                                  DropdownMenuEntry<String>(
+                                    value: i,
+                                    label: i,
+                                  ),
+                              ]),
                           TextField(
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
