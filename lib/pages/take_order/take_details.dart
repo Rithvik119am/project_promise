@@ -91,6 +91,7 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               fontSize: 16.0,
                             ),
                           ),
+
                           /*TextField(
                             decoration: const InputDecoration(
                               labelText: 'Name',
@@ -120,6 +121,18 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                           ),
 
                           /*DropdownButton<String>(
+                         /*TextField(
+                            decoration: const InputDecoration(
+                              labelText: 'Name',
+                            ),
+                             onChanged: (value) {
+                               setState(() {
+                                 graniteOrders[index].name = value;
+                               });
+                             },
+                           ),
+                           ),*/
+                          DropdownButton<String>(
                             hint: const Text('Select Granite Type'),
                             value: 'Black Galaxy',
                             items: <String>[
