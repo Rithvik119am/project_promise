@@ -105,9 +105,16 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               setState(() {
                                 graniteType[index] = value!;
                                 graniteOrders[index].name = value;
+                          /*TextField(
+                            decoration: const InputDecoration(
+                              labelText: 'Name',
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                graniteOrders[index].name = value;
                               });
                             },
-                          ),
+                          ),*/
                           TextField(
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
