@@ -15,20 +15,6 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
   int _inputNumber = 0;
   late List<GraniteOrder> graniteOrders;
   late List<String> graniteType;
-  final List<String> granite_names = [
-    'Black Galaxy',
-    'Nano White',
-    'Tan Brown',
-    'Z-Black',
-    'Black Pearl',
-    'Artificial Box',
-    'Maha Ghani',
-    'Cell White',
-    'Bose Pradise',
-    'Fish Black',
-    'Tan Brown Lapothra',
-    'Cell White Flemming',
-  ];
 
   @override
   void initState() {
@@ -92,32 +78,16 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               fontSize: 16.0,
                             ),
                           ),
-                          /*TextField(
+                          TextField(
                             decoration: const InputDecoration(
                               labelText: 'Name',
                             ),
-                             onChanged: (value) {
-                               setState(() {
-                                 graniteOrders[index].name = value;
-                               });
-                             },
-                           ),
-                           ),*/
-                          DropdownMenu(
-                              menuHeight: 200,
-                              enableFilter: true,
-                              onSelected: (value) => {
-                                    setState(() {
-                                      graniteOrders[index].name = value!;
-                                    }),
-                                  },
-                              dropdownMenuEntries: <DropdownMenuEntry<String>>[
-                                for (var i in granite_names)
-                                  DropdownMenuEntry<String>(
-                                    value: i,
-                                    label: i,
-                                  ),
-                              ]),
+                            onChanged: (value) {
+                              setState(() {
+                                graniteOrders[index].name = value;
+                              });
+                            },
+                          ),
                           TextField(
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
@@ -142,6 +112,7 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               });
                             },
                           ),
+                          // ignore: prefer_const_constructors
                           TextField(
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
