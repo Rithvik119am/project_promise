@@ -15,7 +15,20 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
   int _inputNumber = 0;
   late List<GraniteOrder> graniteOrders;
   late List<String> graniteType;
-
+  late List<String> Granites = [
+    'Black Galaxy',
+    'Nano White',
+    'Tan Brown',
+    'Z-Black',
+    'Black Pearl',
+    'Artificial Box',
+    'Maha Ghani',
+    'Cell White',
+    'Bose Pradise',
+    'Fish Black',
+    'Tan Brown Lapothra',
+    'Cell White Flemming'
+  ];
   @override
   void initState() {
     super.initState();
@@ -89,9 +102,26 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                             },
                           ),
                           ),*/
-                          DropdownButton<String>(
+                          DropdownMenu(
+                            menuHeight: 200,
+                            enableFilter: true,
+                            onSelected: (value) {
+                              setState(() {
+                                graniteOrders[index].name = value!;
+                              });
+                            },
+                            dropdownMenuEntries: <DropdownMenuEntry<String>>[
+                              for (var i in Granites)
+                                DropdownMenuEntry<String>(
+                                  value: i,
+                                  label: i,
+                                ),
+                            ],
+                          ),
+
+                          /*DropdownButton<String>(
                             hint: const Text('Select Granite Type'),
-                            value: graniteType[index],
+                            value: 'Black Galaxy',
                             items: <String>[
                               'Black Galaxy',
                               'Nano White',
@@ -118,7 +148,7 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                                 graniteOrders[index].name = value;
                               });
                             },
-                          ),
+                          ),*/
                           TextField(
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(

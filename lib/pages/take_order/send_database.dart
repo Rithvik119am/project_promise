@@ -98,6 +98,9 @@ class _SendDatabasePageState extends State<SendDatabasePage> {
                       },
                       child: const Text('Go to Start Page'),
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     ElevatedButton(
                       onPressed: () async {
                         Navigator.push(
