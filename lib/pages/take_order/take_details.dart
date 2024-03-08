@@ -172,8 +172,7 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                                     double.tryParse(value) ?? 0.0;
                               });
                             },
-                          ),
-                          // ignore: prefer_const_constructors
+                          ), //new
                           TextField(
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
