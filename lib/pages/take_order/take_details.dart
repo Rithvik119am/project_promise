@@ -78,16 +78,6 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               fontSize: 16.0,
                             ),
                           ),
-                          // TextField(
-                          //   decoration: const InputDecoration(
-                          //     labelText: 'Name',
-                          //   ),
-                          //   onChanged: (value) {
-                          //     setState(() {
-                          //       graniteType[index] = value;
-                          //     });
-                          //   },
-                          // ),
                           DropdownButton<String>(
                             hint: const Text('Select Granite Type'),
                             value: graniteType[index],
@@ -114,8 +104,40 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                             onChanged: (value) {
                               setState(() {
                                 graniteType[index] = value!;
+                                graniteOrders[index].name = value;
                               });
                             },
+                          ),
+                          TextField(
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              labelText: 'Number of Slabs',
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                graniteOrders[index].numberOfSlabs =
+                                    int.tryParse(value) ?? 0;
+                              });
+                            },
+                          ),
+                          TextField(
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              labelText: 'Square Feet',
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                graniteOrders[index].squareFeet =
+                                    double.tryParse(value) ?? 0.0;
+                              });
+                            },
+                          ),
+                          // ignore: prefer_const_constructors
+                          TextField(
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              labelText: 'PerSquare feet',
+                            ),
                           ),
                         ],
                       ),
