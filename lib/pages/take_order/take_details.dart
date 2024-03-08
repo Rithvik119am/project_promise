@@ -78,42 +78,49 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                               fontSize: 16.0,
                             ),
                           ),
-                          // TextField(
-                          //   decoration: const InputDecoration(
-                          //     labelText: 'Name',
-                          //   ),
-                          //   onChanged: (value) {
-                          //     setState(() {
-                          //       graniteType[index] = value;
-                          //     });
-                          //   },
-                          // ),
-                          DropdownButton<String>(
-                            hint: const Text('Select Granite Type'),
-                            value: graniteType[index],
-                            items: <String>[
-                              'Black Galaxy',
-                              'Nano White',
-                              'Tan Brown',
-                              'Z-Black',
-                              'Black Pearl',
-                              'Artificial Box',
-                              'Maha Ghani',
-                              'Cell White',
-                              'Bose Pradise',
-                              'Fish Black',
-                              'Tan Brown Lapothra',
-                              'Cell White Flemming',
-                              // ... many more to come
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
+                          TextField(
+                            decoration: const InputDecoration(
+                              labelText: 'Name',
+                            ),
                             onChanged: (value) {
                               setState(() {
-                                graniteType[index] = value!;
+                                graniteOrders[index].name = value;
+                              });
+                            },
+                          ),
+                          TextField(
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              labelText: 'Number of Slabs',
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                graniteOrders[index].numberOfSlabs =
+                                    int.tryParse(value) ?? 0;
+                              });
+                            },
+                          ),
+                          TextField(
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              labelText: 'Square Feet',
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                graniteOrders[index].squareFeet =
+                                    double.tryParse(value) ?? 0.0;
+                              });
+                            },
+                          ),
+                          TextField(
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              labelText: 'PerSquare feet',
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                graniteOrders[index].perSqurare =
+                                    double.tryParse(value) ?? 0.0;
                               });
                             },
                           ),
