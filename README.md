@@ -30,7 +30,7 @@ To get started with this project, follow the steps below:
 
 ## Database API
 
-The Database API has been removed from this project. If you need to add a database functionality, We have use `appwrite` ad the Baas for the project.
+The Database API has been removed from this project. If you need to add a database functionality, We have use `appwrite` as the Baas for the project.fill the values in the ```lib\groups\constants.dart``` file
 
 ## Owner_info.dart
 
