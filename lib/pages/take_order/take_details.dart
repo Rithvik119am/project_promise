@@ -101,6 +101,8 @@ class TakeDetailsPageState extends State<TakeDetailsPage> {
                             },
                           ),*/
                           DropdownMenu(
+                              menuHeight: 200,
+                              enableFilter: true,
                               onSelected: (value) => {
                                     setState(() {
                                       graniteOrders[index].name = value!;
