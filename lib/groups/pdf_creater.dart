@@ -6,6 +6,7 @@ import 'package:project_promise/groups/customer.dart';
 import 'package:project_promise/groups/granite.dart';
 import 'package:project_promise/groups/owner_info.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:project_promise/groups/imager_to_pdf.dart';
 
 class PdfCreater {
   static Future<Uint8List> generateDocument() async {
@@ -35,16 +36,23 @@ Future<Uint8List> makePdf(String invoice) async {
 }
 
 Future<Uint8List> makePdfForOrder(Order data) async {
-  // final image = await imageDocument();
+  final image = await imageDocument();
   final pdf = Document();
   pdf.addPage(
     Page(build: (context) {
       return Column(children: [
-        //Image(image),
         Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Text(
-            OwnerInfo().name,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(width: 140),
+              Text(
+                OwnerInfo().name,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              SizedBox(width: 70),
+              Image(image, width: 75, height: 75),
+            ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

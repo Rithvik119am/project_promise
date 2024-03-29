@@ -3,24 +3,60 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:project_promise/groups/customer.dart';
+import 'package:project_promise/groups/constants.dart';
+import 'package:project_promise/groups/authenticate.dart';
+import 'package:provider/provider.dart';
+
+Future<int> getBillNo() async {
+  final client = Client().setEndpoint(API_END_POINT).setProject(PROJECT_ID);
+  final databases = Databases(client);
+  int billNo = -1;
+  try {
+    final response = await databases.listDocuments(
+      databaseId: DATABASE_ID,
+      collectionId: BILL_NO,
+    );
+    billNo = response.documents[0].data['Bill_no'];
+  } catch (e) {
+    print("Error in fetching data from database: $e");
+  }
+  return billNo;
+}
+
+Future<void> incrementBillNo(int billNo) async {
+  final client = Client().setEndpoint(API_END_POINT).setProject(PROJECT_ID);
+  final databases = Databases(client);
+  try {
+    final response = await databases.updateDocument(
+      databaseId: DATABASE_ID,
+      collectionId: BILL_NO,
+      documentId: '6603e99d6d2abf5b61ff',
+      data: {
+        'Bill_no': billNo + 1,
+      },
+    );
+  } catch (e) {
+    print("Error in fetching data from database: $e");
+  }
+}
 
 Future<int> temp(Order dataa) async {
-  final client = Client()
-      .setEndpoint(API_END_POINT)
-      .setProject(PROJECT_ID)
-      .setSelfSigned(status: true);
+  final client = Client().setEndpoint(API_END_POINT).setProject(PROJECT_ID);
   final databases = Databases(client);
 
   try {
+    int previousBillNo = await getBillNo();
     final customerDoc = await databases.createDocument(
       databaseId: DATABASE_ID,
       collectionId: CUSTOMER_COLLECTION_ID,
-      documentId: ID.unique(),
+      documentId: (previousBillNo + 1).toString(),
       data: dataa.toJsonCoustomers(),
     );
+    print(1);
     List<String> orderIds = [];
     List<Map<String, dynamic>> eachGranite =
         dataa.toJsonOrders(customerDoc.$id);
+    print(2);
     for (var i in eachGranite) {
       final orderDoc = await databases.createDocument(
         databaseId: DATABASE_ID,
@@ -30,6 +66,7 @@ Future<int> temp(Order dataa) async {
       );
       orderIds.add(orderDoc.$id);
     }
+    print(3);
     final customer = await databases.updateDocument(
       databaseId: DATABASE_ID,
       collectionId: CUSTOMER_COLLECTION_ID,
@@ -38,6 +75,7 @@ Future<int> temp(Order dataa) async {
         'graniteOrder': orderIds,
       },
     );
+    incrementBillNo(previousBillNo);
   } on AppwriteException catch (e) {
     print(e);
     return 1;
@@ -46,18 +84,15 @@ Future<int> temp(Order dataa) async {
 }
 
 void deleteOrderDatabase(String id) async {
-  final client = Client()
-      .setEndpoint(API_END_POINT)
-      .setProject(PROJECT_ID)
-      .setSelfSigned(status: true);
-  final databases = Databases(client);
   try {
+    final client = Client().setEndpoint(API_END_POINT).setProject(PROJECT_ID);
+    final databases = Databases(client);
     final response = await databases.deleteDocument(
         databaseId: DATABASE_ID,
         collectionId: CUSTOMER_COLLECTION_ID,
         documentId: id);
   } catch (e) {
-    print("Error in deleting order: $e");
+    print("Error in deleting data from database: $e");
   }
 }
 
@@ -66,10 +101,7 @@ Future<List<Order>> getDataDatabase(DateTime date) async {
   DateTime previousDate = DateTime(date.year, date.month, date.day);
   DateTime nextDate =
       DateTime(date.year, date.month, date.day).add(const Duration(days: 1));
-  final client = Client()
-      .setEndpoint(API_END_POINT)
-      .setProject(PROJECT_ID)
-      .setSelfSigned(status: true);
+  final client = Client().setEndpoint(API_END_POINT).setProject(PROJECT_ID);
   final databases = Databases(client);
   try {
     final response = await databases.listDocuments(

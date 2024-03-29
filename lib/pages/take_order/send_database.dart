@@ -103,6 +103,7 @@ class _SendDatabasePageState extends State<SendDatabasePage> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
+                        widget.order.id = (await getBillNo()).toString();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
