@@ -1,11 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:appwrite/appwrite.dart';
-import 'package:appwrite/models.dart';
 import 'package:project_promise/groups/customer.dart';
 import 'package:project_promise/groups/constants.dart';
-import 'package:project_promise/groups/authenticate.dart';
-import 'package:provider/provider.dart';
 
 Future<int> getBillNo() async {
   final client = Client().setEndpoint(API_END_POINT).setProject(PROJECT_ID);
