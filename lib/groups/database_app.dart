@@ -49,11 +49,9 @@ Future<int> temp(Order dataa) async {
       documentId: (previousBillNo + 1).toString(),
       data: dataa.toJsonCoustomers(),
     );
-    print(1);
     List<String> orderIds = [];
     List<Map<String, dynamic>> eachGranite =
         dataa.toJsonOrders(customerDoc.$id);
-    print(2);
     for (var i in eachGranite) {
       final orderDoc = await databases.createDocument(
         databaseId: DATABASE_ID,
@@ -63,7 +61,6 @@ Future<int> temp(Order dataa) async {
       );
       orderIds.add(orderDoc.$id);
     }
-    print(3);
     final customer = await databases.updateDocument(
       databaseId: DATABASE_ID,
       collectionId: CUSTOMER_COLLECTION_ID,
