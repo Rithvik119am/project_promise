@@ -21,9 +21,8 @@ Follow these steps to set up and run the project:
 1.  **Prerequisites**: Make sure you have the Flutter SDK installed and configured on your system. You can verify your installation by running `flutter doctor`.
 2.  **Clone the Repository**:
     ```bash
-    git clone <YOUR_REPOSITORY_URL> 
+    git clone https://github.com/Rithvik119am/project_promise 
     ```
-    Replace `<YOUR_REPOSITORY_URL>` with the actual URL of this repository.
 3.  **Navigate to Project Directory**:
     ```bash
     cd project_promise
@@ -57,17 +56,14 @@ This project includes the following features to help granite businesses manage t
 -   **Digital Order Taking**:
     -   Easily capture customer orders with all necessary details, reducing manual errors and paperwork.
     -   Orders are securely saved to the cloud, ensuring data integrity and accessibility.
-    -   ![Order Entry Screenshot](assets/1.png)
 
 -   **Automated PDF Billing**:
     -   Generate professional PDF invoices with a single click, pre-filled with order details, customer information, and your business branding.
     -   Simplifies the billing process and provides customers with clear and accurate invoices.
-    -   ![Billing Screenshot](assets/4.png)
 
 -   **Anytime, Anywhere Data Access**:
     -   Access your order history, customer database, and billing records from any device (mobile, tablet, desktop) at any time.
     -   Cloud synchronization ensures your data is always up-to-date across all platforms.
-    -   ![Data Access Screenshot](assets/2.png)
 
 -   **Tax Evaluation Support**:
     -   Streamline your tax evaluation process by maintaining organized digital records of all sales and transactions.
